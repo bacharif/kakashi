@@ -44,16 +44,16 @@ trait IVault {
 #[contract]
 mod Vault {
     use super::IVault;
-    use simple_vault::erc4626::ERC4626;
-    use simple_vault::strategy::{IStrategyDispatcher, IStrategyDispatcherTrait};
-    use simple_vault::ownable::{Ownable, Ownable::OwnableImpl};
+    use kakashi_vault::erc4626::ERC4626;
+    use kakashi_vault::strategy::{IStrategyDispatcher, IStrategyDispatcherTrait};
+    use kakashi_vault::ownable::{Ownable, Ownable::OwnableImpl};
     use openzeppelin::token::erc20::{ERC20, IERC20Dispatcher, IERC20DispatcherTrait};
     use traits::Into;
     use integer::BoundedInt;
     use starknet::ContractAddress;
     use starknet::{get_caller_address, get_contract_address};
     use option::OptionTrait;
-    use simple_vault::utils::maths::MathRounding;
+    use kakashi_vault::utils::maths::MathRounding;
     use debug::PrintTrait;
 
     struct Storage {
