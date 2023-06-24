@@ -21,3 +21,4 @@ sierra = true
 # Enable CASM codegen.
 casm = true
 name = "compiled"
+allowed-libfuncs-list.name  = "experimental_v0.1.0"
