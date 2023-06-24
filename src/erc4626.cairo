@@ -51,7 +51,7 @@ mod ERC4626 {
     use option::OptionTrait;
     use integer::BoundedInt;
     use debug::PrintTrait;
-    use simple_vault::utils::maths::MathRounding;
+    use kakashi_vault::utils::maths::MathRounding;
 
 
     struct Storage {
