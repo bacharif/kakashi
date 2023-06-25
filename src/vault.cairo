@@ -108,13 +108,6 @@ mod Vault {
         }
 
 
-        // fn increase_allowance(spender: ContractAddress, added_value: u256) -> bool {
-        //     ERC20::_increase_allowance(spender, added_value)
-        // }
-
-        // fn decrease_allowance(spender: ContractAddress, subtracted_value: u256) -> bool {
-        //     ERC20::_decrease_allowance(spender, subtracted_value)
-        // }
         ////////////////////////////////////////////////////////////////
         // ERC4626 functions
         ////////////////////////////////////////////////////////////////

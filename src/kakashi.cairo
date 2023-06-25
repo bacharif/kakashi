@@ -1,7 +1,10 @@
 #[contract]
 mod Kakashi {
+    use super::IVaultDispatcherTrait;
+    use super::IVaultDispatcher;
     use starknet::get_caller_address;
     use starknet::ContractAddress;
+    use kakashi_vault::Vault;
     use openzeppelin::contracts::token::erc20::IERC20;
 
     struct Storage {
@@ -20,22 +23,23 @@ mod Kakashi {
     fn swap(token0: IERC20, token1:IERC20, amount: felt252) {
         let caller = get_caller_address();
         let vault0 = vaults::read(token0);
+        IVaultDispatcher { contract_address: vault0.contract_address }.deposit(caller, amount);
         let vault1 = vaults::read(token1);
-        let vault0_balance = vault0.balance_of(caller);
-        let vault1_balance = vault1.balance_of(caller);
-        let vault0_amount = vault0_balance * amount / vault0.total_supply();
-        let vault1_amount = vault1_balance * amount / vault1.total_supply();
-        vault0.transfer_from(caller, vault1, vault0_amount);
-        vault1.transfer_from(caller, vault0, vault1_amount);
+        IVaultDispatcher { contract_address: vault1.contract_address }.withdraw(caller, amount);
     }
 
     #[external]
     fn addLiquidity(token0:IERC20, amount: felt252) {
         let caller = get_caller_address();
         let vault0 = vaults::read(token0);
-        let vault0_balance = vault0.balance_of(caller);
-        let vault0_amount = vault0_balance * amount / vault0.total_supply();
-        vault0.transfer_from(caller, vault0, vault0_amount);
+        IVaultDispatcher { contract_address: vault0.contract_address }.deposit(caller, amount);
+    }
+
+    #[external]
+    fn removeLiquidty(token0:IERC20, amount: felt252) {
+        let caller = get_caller_address();
+        let vault0 = vaults::read(token0);
+        IVaultDispatcher { contract_address: vault0.contract_address }.withdraw(caller, amount);
     }
 
 }
